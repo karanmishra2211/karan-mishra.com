@@ -1,0 +1,186 @@
+/* ─────────────────────────────────────────────
+   Memorable moments in economic thought
+   Same world as the academic site — reading mode.
+───────────────────────────────────────────── */
+
+:root {
+  --cream:          #faf9f6;
+  --charcoal:       #1c1c1c;
+  --rust:           #a84f3e;
+  --text-primary:   #1c1c1c;
+  --text-secondary: #4a4a4a;
+  --text-tertiary:  #888;
+  --rule:           #e4e2dc;
+  --font-serif:     "Fraunces", Georgia, serif;
+  --font-sans:      "Inter", -apple-system, sans-serif;
+  --col:            62ch;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
+}
+
+/* ── Top bar ── */
+.topbar {
+  padding: 1.3rem 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.back-link {
+  font-size: 0.82rem;
+  font-weight: 450;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s;
+}
+
+.back-link:hover { color: var(--charcoal); }
+
+/* ── Page wrap ── */
+.page-wrap {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 5rem 1.5rem 4rem;
+}
+
+/* ── Page header ── */
+.section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rust);
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+}
+
+h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: -0.014em;
+  line-height: 1.15;
+  margin: 0 0 0.7rem;
+  color: var(--text-primary);
+}
+
+.page-note {
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  margin: 0 0 3.5rem;
+}
+
+/* ── Quote list ── */
+.quote-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: quotes;
+}
+
+.quote-item {
+  padding: 2.2rem 0;
+  border-top: 1px solid var(--rule);
+  counter-increment: quotes;
+  position: relative;
+}
+
+.quote-item::before {
+  content: counter(quotes, decimal-leading-zero);
+  position: absolute;
+  top: 2.3rem;
+  left: -2.8rem;
+  font-size: 0.68rem;
+  color: var(--rule);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  font-family: var(--font-sans);
+}
+
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+blockquote p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin: 0 0 0.9rem;
+}
+
+blockquote footer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+blockquote cite {
+  font-style: normal;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.year,
+.source {
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+}
+
+.source {
+  font-style: italic;
+}
+
+/* ── Footer ── */
+.page-footer {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+  border-top: 1px solid var(--rule);
+}
+
+.page-footer a {
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.page-footer a:hover { color: var(--rust); }
+
+/* ── Responsive ── */
+@media (min-width: 800px) {
+  .page-wrap {
+    padding-left: 4rem; /* room for the counter numbers */
+  }
+
+  .page-footer {
+    padding-left: 4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .topbar { padding: 1.1rem 1.2rem; }
+  .page-wrap { padding: 3.5rem 1.2rem 3rem; }
+  .page-footer { padding: 1.5rem 1.2rem 2.5rem; }
+
+  .quote-item::before { display: none; }
+}

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Photographs — Karan Mishra</title>
+    <meta name="description" content="Pictures taken by Karan Mishra." />
+    <!-- Discourage search indexing — this is a hidden room -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:opsz,wght@14..32,350;14..32,400;14..32,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="photography.css" />
+  </head>
+  <body class="view-grid">
+
+    <!-- ── Top bar ── -->
+    <div class="topbar">
+      <a class="back-link" href="index-v2.html">
+        <span class="back-arrow">←</span> Karan Mishra
+      </a>
+      <div class="view-toggle" role="group" aria-label="View mode">
+        <button class="view-btn active" data-view="grid" title="Grid view" aria-pressed="true">
+          <!-- grid icon -->
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <rect x="1" y="1" width="6" height="6" rx="0.5"/>
+            <rect x="9" y="1" width="6" height="6" rx="0.5"/>
+            <rect x="1" y="9" width="6" height="6" rx="0.5"/>
+            <rect x="9" y="9" width="6" height="6" rx="0.5"/>
+          </svg>
+        </button>
+        <button class="view-btn" data-view="scroll" title="Strip view" aria-pressed="false">
+          <!-- strip / horizontal icon -->
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <rect x="1"  y="3" width="4" height="10" rx="0.5"/>
+            <rect x="6"  y="3" width="4" height="10" rx="0.5"/>
+            <rect x="11" y="3" width="4" height="10" rx="0.5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <main>
+
+      <!-- ══ Paris ══ -->
+      <section class="series" id="paris">
+        <div class="series-header">
+          <h2 class="series-name">Paris</h2>
+          <span class="series-count">— add photos below</span>
+        </div>
+
+        <!-- Grid view -->
+        <div class="photo-grid" data-series="paris">
+          <!--
+            To add photos: replace each .placeholder div with:
+
+            <div class="photo-item" data-series="paris" data-index="0">
+              <img src="photos/paris/01.jpg" alt="Brief description" loading="lazy" />
+            </div>
+
+            Keep data-index sequential (0, 1, 2…) for the lightbox to work.
+          -->
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+        </div>
+
+        <!-- Strip / scroll view -->
+        <div class="photo-strip" data-series="paris">
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+        </div>
+      </section>
+
+      <!-- ══ Delhi ══ -->
+      <section class="series" id="delhi">
+        <div class="series-header">
+          <h2 class="series-name">Delhi</h2>
+          <span class="series-count">— add photos below</span>
+        </div>
+
+        <!-- Grid view -->
+        <div class="photo-grid" data-series="delhi">
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+        </div>
+
+        <!-- Strip / scroll view -->
+        <div class="photo-strip" data-series="delhi">
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+          <div class="photo-item placeholder" data-label="photo"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── Footer ── -->
+    <footer class="photo-footer">
+      <span><a href="index-v2.html">← back</a></span>
+      <span>Karan Mishra</span>
+    </footer>
+
+    <!-- ── Lightbox ── -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+      <button class="lightbox-close" id="lb-close" aria-label="Close">✕</button>
+      <button class="lightbox-prev" id="lb-prev" aria-label="Previous photo">←</button>
+      <div class="lightbox-img-wrap">
+        <img id="lb-img" src="" alt="" />
+      </div>
+      <button class="lightbox-next" id="lb-next" aria-label="Next photo">→</button>
+      <div class="lightbox-counter" id="lb-counter"></div>
+    </div>
+
+    <script>
+      // ── View toggle ──
+      const body      = document.body;
+      const viewBtns  = document.querySelectorAll(".view-btn");
+
+      viewBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const v = btn.dataset.view;
+          body.className = "view-" + v;
+          viewBtns.forEach(b => {
+            b.classList.toggle("active", b === btn);
+            b.setAttribute("aria-pressed", b === btn);
+          });
+        });
+      });
+
+      // ── Drag-to-scroll for strips ──
+      document.querySelectorAll(".photo-strip").forEach(strip => {
+        let isDown = false, startX, scrollLeft;
+        strip.addEventListener("mousedown", e => {
+          isDown = true;
+          startX = e.pageX - strip.offsetLeft;
+          scrollLeft = strip.scrollLeft;
+        });
+        strip.addEventListener("mouseleave", () => isDown = false);
+        strip.addEventListener("mouseup",    () => isDown = false);
+        strip.addEventListener("mousemove", e => {
+          if (!isDown) return;
+          e.preventDefault();
+          strip.scrollLeft = scrollLeft - (e.pageX - strip.offsetLeft - startX);
+        });
+      });
+
+      // ── Lightbox ──
+      const lightbox  = document.getElementById("lightbox");
+      const lbImg     = document.getElementById("lb-img");
+      const lbClose   = document.getElementById("lb-close");
+      const lbPrev    = document.getElementById("lb-prev");
+      const lbNext    = document.getElementById("lb-next");
+      const lbCounter = document.getElementById("lb-counter");
+
+      let currentSeries = [];
+      let currentIndex  = 0;
+
+      function openLightbox(items, index) {
+        currentSeries = items;
+        currentIndex  = index;
+        showImage();
+        lightbox.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        document.body.style.overflow = "";
+        lbImg.src = "";
+      }
+
+      function showImage() {
+        const item = currentSeries[currentIndex];
+        const img  = item.querySelector("img");
+        if (!img) return;
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCounter.textContent = `${currentIndex + 1} / ${currentSeries.length}`;
+        lbPrev.style.opacity = currentIndex === 0 ? "0.2" : "1";
+        lbNext.style.opacity = currentIndex === currentSeries.length - 1 ? "0.2" : "1";
+      }
+
+      function step(dir) {
+        const next = currentIndex + dir;
+        if (next < 0 || next >= currentSeries.length) return;
+        currentIndex = next;
+        showImage();
+      }
+
+      // Attach click to real photo items (not placeholders)
+      document.querySelectorAll(".photo-grid").forEach(grid => {
+        const items = [...grid.querySelectorAll(".photo-item:not(.placeholder)")];
+        items.forEach((item, i) => {
+          item.addEventListener("click", () => openLightbox(items, i));
+        });
+      });
+
+      lbClose.addEventListener("click", closeLightbox);
+      lbPrev.addEventListener("click",  () => step(-1));
+      lbNext.addEventListener("click",  () => step(1));
+
+      lightbox.addEventListener("click", e => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener("keydown", e => {
+        if (!lightbox.classList.contains("open")) return;
+        if (e.key === "Escape")      closeLightbox();
+        if (e.key === "ArrowLeft")   step(-1);
+        if (e.key === "ArrowRight")  step(1);
+      });
+    </script>
+  </body>
+</html>
