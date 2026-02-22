@@ -15,106 +15,39 @@
     />
     <link rel="stylesheet" href="photography.css" />
   </head>
-  <body class="view-grid">
+  <body class="view-scroll">
 
     <!-- ── Top bar ── -->
     <div class="topbar">
-      <a class="back-link" href="index-v2.html">
+      <a class="back-link" href="index.html">
         <span class="back-arrow">←</span> Karan Mishra
       </a>
       <div class="view-toggle" role="group" aria-label="View mode">
-        <button class="view-btn active" data-view="grid" title="Grid view" aria-pressed="true">
-          <!-- grid icon -->
-          <svg viewBox="0 0 16 16" aria-hidden="true">
-            <rect x="1" y="1" width="6" height="6" rx="0.5"/>
-            <rect x="9" y="1" width="6" height="6" rx="0.5"/>
-            <rect x="1" y="9" width="6" height="6" rx="0.5"/>
-            <rect x="9" y="9" width="6" height="6" rx="0.5"/>
-          </svg>
-        </button>
-        <button class="view-btn" data-view="scroll" title="Strip view" aria-pressed="false">
-          <!-- strip / horizontal icon -->
-          <svg viewBox="0 0 16 16" aria-hidden="true">
-            <rect x="1"  y="3" width="4" height="10" rx="0.5"/>
-            <rect x="6"  y="3" width="4" height="10" rx="0.5"/>
-            <rect x="11" y="3" width="4" height="10" rx="0.5"/>
-          </svg>
-        </button>
+        <button class="view-btn active" data-view="scroll" title="Scroll view" aria-pressed="true">scroll</button>
+        <button class="view-btn" data-view="grid" title="Grid view" aria-pressed="false">grid</button>
       </div>
     </div>
 
     <main>
-
-      <!-- ══ Paris ══ -->
-      <section class="series" id="paris">
+      <!-- ══ Gallery ══ -->
+      <section class="series" id="gallery">
         <div class="series-header">
-          <h2 class="series-name">Paris</h2>
-          <span class="series-count">— add photos below</span>
+          <h2 class="series-name"></h2>
+          <!-- <span class="series-count">— add photos below</span> -->
         </div>
+
+        <!-- Scroll view -->
+        <div class="photo-scroll" id="photo-scroll" data-series="gallery"></div>
 
         <!-- Grid view -->
-        <div class="photo-grid" data-series="paris">
-          <!--
-            To add photos: replace each .placeholder div with:
-
-            <div class="photo-item" data-series="paris" data-index="0">
-              <img src="photos/paris/01.jpg" alt="Brief description" loading="lazy" />
-            </div>
-
-            Keep data-index sequential (0, 1, 2…) for the lightbox to work.
-          -->
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-        </div>
-
-        <!-- Strip / scroll view -->
-        <div class="photo-strip" data-series="paris">
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-        </div>
-      </section>
-
-      <!-- ══ Delhi ══ -->
-      <section class="series" id="delhi">
-        <div class="series-header">
-          <h2 class="series-name">Delhi</h2>
-          <span class="series-count">— add photos below</span>
-        </div>
-
-        <!-- Grid view -->
-        <div class="photo-grid" data-series="delhi">
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-        </div>
-
-        <!-- Strip / scroll view -->
-        <div class="photo-strip" data-series="delhi">
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-          <div class="photo-item placeholder" data-label="photo"></div>
-        </div>
+        <div class="photo-grid" id="photo-grid" data-series="gallery"></div>
       </section>
 
     </main>
 
     <!-- ── Footer ── -->
     <footer class="photo-footer">
-      <span><a href="index-v2.html">← back</a></span>
+      <span><a href="index.html">← back</a></span>
       <span>Karan Mishra</span>
     </footer>
 
@@ -137,7 +70,8 @@
       viewBtns.forEach(btn => {
         btn.addEventListener("click", () => {
           const v = btn.dataset.view;
-          body.className = "view-" + v;
+          body.classList.remove("view-scroll", "view-grid");
+          body.classList.add("view-" + v);
           viewBtns.forEach(b => {
             b.classList.toggle("active", b === btn);
             b.setAttribute("aria-pressed", b === btn);
@@ -145,22 +79,39 @@
         });
       });
 
-      // ── Drag-to-scroll for strips ──
-      document.querySelectorAll(".photo-strip").forEach(strip => {
-        let isDown = false, startX, scrollLeft;
-        strip.addEventListener("mousedown", e => {
-          isDown = true;
-          startX = e.pageX - strip.offsetLeft;
-          scrollLeft = strip.scrollLeft;
-        });
-        strip.addEventListener("mouseleave", () => isDown = false);
-        strip.addEventListener("mouseup",    () => isDown = false);
-        strip.addEventListener("mousemove", e => {
-          if (!isDown) return;
-          e.preventDefault();
-          strip.scrollLeft = scrollLeft - (e.pageX - strip.offsetLeft - startX);
-        });
-      });
+      // ── Photo data and rendering ──
+      const photos = [
+        { file: "paris_feb22_26.jpg", caption: "Paris, France · Feb 2026" },
+        { file: "delhi_may20.jpg", caption: "Delhi, India · May 2020" },
+        { file: "Bahamas_Jan26.jpg", caption: "Bahamas · Jan 2026" },
+        { file: "Delhi_July25.jpg", caption: "Delhi, India · July 2025" },
+        { file: "Kyoto_Nov26.jpg", caption: "Kyoto, Japan · Nov 2026" },
+        { file: "Montmarte_Dec24.JPG", caption: "Montmartre, France · Dec 2024" }
+      ];
+
+      const photoScroll = document.getElementById("photo-scroll");
+      const photoGrid = document.getElementById("photo-grid");
+
+      photoScroll.innerHTML = photos
+        .map(
+          (photo, index) => `
+              <button class="photo-scroll-item" type="button" data-index="${index}">
+                <img src="photos/${photo.file}" alt="${photo.caption}" loading="lazy" />
+                <span class="photo-scroll-caption">${photo.caption}</span>
+              </button>
+          `
+        )
+        .join("");
+
+      photoGrid.innerHTML = photos
+        .map(
+          (photo, index) => `
+            <div class="photo-item" data-series="gallery" data-index="${index}">
+              <img src="photos/${photo.file}" alt="${photo.caption}" loading="lazy" />
+            </div>
+          `
+        )
+        .join("");
 
       // ── Lightbox ──
       const lightbox  = document.getElementById("lightbox");
@@ -205,11 +156,19 @@
         showImage();
       }
 
-      // Attach click to real photo items (not placeholders)
-      document.querySelectorAll(".photo-grid").forEach(grid => {
-        const items = [...grid.querySelectorAll(".photo-item:not(.placeholder)")];
-        items.forEach((item, i) => {
-          item.addEventListener("click", () => openLightbox(items, i));
+      const galleryItems = [...document.querySelectorAll(".photo-grid .photo-item")];
+
+      // Grid clicks
+      galleryItems.forEach((item, i) => {
+        item.addEventListener("click", () => openLightbox(galleryItems, i));
+      });
+
+      // Scroll clicks
+      document.querySelectorAll(".photo-scroll-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          const index = Number(item.dataset.index);
+          if (Number.isNaN(index)) return;
+          openLightbox(galleryItems, index);
         });
       });
 
