@@ -258,11 +258,11 @@ h1 {
 }
 
 .intro a {
-  text-decoration: none;
+  text-decoration-line: none;
 }
 
 .intro a:hover {
-  text-decoration: underline;
+  text-decoration-line: underline;
   text-decoration-color: rgba(168, 79, 62, 0.45);
   text-underline-offset: 0.16em;
 }
@@ -398,11 +398,11 @@ h3 {
 }
 
 .prose-list a {
-  text-decoration: none;
+  text-decoration-line: none;
 }
 
 .prose-list a:hover {
-  text-decoration: underline;
+  text-decoration-line: underline;
   text-decoration-color: rgba(168, 79, 62, 0.45);
   text-underline-offset: 0.16em;
 }
