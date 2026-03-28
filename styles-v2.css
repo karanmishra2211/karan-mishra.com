@@ -257,6 +257,16 @@ h1 {
   margin: 0;
 }
 
+.intro a {
+  text-decoration: none;
+}
+
+.intro a:hover {
+  text-decoration: underline;
+  text-decoration-color: rgba(168, 79, 62, 0.45);
+  text-underline-offset: 0.16em;
+}
+
 .intro + .intro {
   margin-top: 2.2rem;
 }
