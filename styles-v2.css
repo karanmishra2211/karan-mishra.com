@@ -68,13 +68,14 @@ main, .nav, .footer { position: relative; z-index: 1; }
 /* ── Links ── */
 a {
   color: var(--rust);
-  text-decoration-color: rgba(168, 79, 62, 0.3);
-  text-underline-offset: 0.16em;
-  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  text-decoration-color: rgba(168, 79, 62, 0.75);
+  text-decoration: underline;
+  text-decoration-color: rgba(168, 79, 62, 0.45);
+  text-underline-offset: 0.16em;
 }
 
 /* ── Navigation ── */
@@ -257,16 +258,6 @@ h1 {
   margin: 0;
 }
 
-.intro a {
-  text-decoration-line: none;
-}
-
-.intro a:hover {
-  text-decoration-line: underline;
-  text-decoration-color: rgba(168, 79, 62, 0.45);
-  text-underline-offset: 0.16em;
-}
-
 .intro + .intro {
   margin-top: 2.2rem;
 }
@@ -395,16 +386,6 @@ h3 {
 .prose-list li:first-child {
   border-top: none;
   padding-top: 0;
-}
-
-.prose-list a {
-  text-decoration-line: none;
-}
-
-.prose-list a:hover {
-  text-decoration-line: underline;
-  text-decoration-color: rgba(168, 79, 62, 0.45);
-  text-underline-offset: 0.16em;
 }
 
 .prose-list .meta {
