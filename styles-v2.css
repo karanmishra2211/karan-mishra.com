@@ -257,6 +257,10 @@ h1 {
   margin: 0;
 }
 
+.intro + .intro {
+  margin-top: 0.9rem;
+}
+
 /* ── Sections ── */
 .section {
   max-width: var(--col-wide);
