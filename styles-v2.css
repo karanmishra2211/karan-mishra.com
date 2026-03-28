@@ -397,6 +397,16 @@ h3 {
   padding-top: 0;
 }
 
+.prose-list a {
+  text-decoration: none;
+}
+
+.prose-list a:hover {
+  text-decoration: underline;
+  text-decoration-color: rgba(168, 79, 62, 0.45);
+  text-underline-offset: 0.16em;
+}
+
 .prose-list .meta {
   display: block;
   font-size: 0.855rem;
