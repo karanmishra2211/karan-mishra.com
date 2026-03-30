@@ -121,13 +121,59 @@ a:hover {
   flex-shrink: 0;
 }
 
+/* ── Menu button ── */
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-line {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--text-primary);
+  border-radius: 1px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-btn.open .menu-line:first-child {
+  transform: translateY(3.25px) rotate(45deg);
+}
+
+.menu-btn.open .menu-line:last-child {
+  transform: translateY(-3.25px) rotate(-45deg);
+}
+
+/* ── Dropdown ── */
+.nav-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  padding: 0 1.5rem;
+  max-width: var(--col-wide);
+  margin: 0 auto;
+}
+
+.nav-dropdown.open {
+  max-height: 220px;
+  padding: 0.4rem 1.5rem 1.2rem;
+}
+
 .nav-links {
   display: flex;
-  gap: 1.6rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.6rem;
   list-style: none;
   margin: 0;
   padding: 0;
+  align-items: flex-end;
 }
 
 .nav-links a {
@@ -137,14 +183,11 @@ a:hover {
   font-weight: 450;
   letter-spacing: 0.005em;
   transition: color 0.2s ease;
-  padding-bottom: 1px;
-  border-bottom: 1px solid transparent;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--text-primary);
-  border-color: var(--rust);
+  color: var(--rust);
 }
 
 /* ── Hero ── */
