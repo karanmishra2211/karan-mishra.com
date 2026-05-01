@@ -45,7 +45,7 @@
         <ul class="nav-links">
           <li><a href="#research">Research</a></li>
           <li><a href="#policy">Policy</a></li>
-          <li><a href="#resources">More</a></li>
+          <li><a href="#resources">Other</a></li>
           <li><a href="https://www.dropbox.com/scl/fi/07hiwgb2520mcle3j4gcz/MishraK_CV_Sep25.pdf?rlkey=df0lsnqw66tt08urj2f0k3fey&st=728ghiyx&dl=0" target="_blank" rel="noreferrer">CV</a></li>
         </ul>
       </nav>
@@ -160,33 +160,37 @@
         </ul>
       </section>
 
-      <!-- ── More ── -->
+      <!-- ── Other ── -->
       <section class="section reveal" id="resources">
-        <p class="section-label"></p>
-        <h2>More</h2>
-        <ul class="prose-list">
-          <li>
-            <a href="quotes.html">
-              Memorable moments in the history of economic thought
-            </a>
-          </li>
-          <li>
-            <a href="https://atlas-offshore-world.org" target="_blank" rel="noreferrer">
-              Atlas of the Offshore World
-            </a>
-          </li>
-          <li>
-            <a href="https://sangmino.github.io/resources/" target="_blank" rel="noreferrer">
-              Helpful Resources
-            </a>
-          </li>
-          <li>
-            <a href="https://paris-ai-reading-group.vercel.app/" target="_blank" rel="noreferrer">Paris Political Economy of AI Reading Group</a>
-          </li>
-          <li>
-            <a href="photography.html">Pictures I have taken</a>
-          </li>
-        </ul>
+        <button class="section-toggle" id="other-toggle" aria-expanded="false">
+          <h2>Other</h2>
+          <span class="toggle-arrow">+</span>
+        </button>
+        <div class="section-collapsible" id="other-content">
+          <ul class="prose-list">
+            <li>
+              <a href="quotes.html">
+                Memorable moments in the history of economic thought
+              </a>
+            </li>
+            <li>
+              <a href="https://atlas-offshore-world.org" target="_blank" rel="noreferrer">
+                Atlas of the Offshore World
+              </a>
+            </li>
+            <li>
+              <a href="https://sangmino.github.io/resources/" target="_blank" rel="noreferrer">
+                Helpful Resources
+              </a>
+            </li>
+            <li>
+              <a href="https://paris-ai-reading-group.vercel.app/" target="_blank" rel="noreferrer">Paris Political Economy of AI Reading Group</a>
+            </li>
+            <li>
+              <a href="photography.html">Pictures I have taken</a>
+            </li>
+          </ul>
+        </div>
       </section>
     </main>
 
@@ -237,6 +241,16 @@
           const y = target.getBoundingClientRect().top + window.scrollY - 88;
           window.scrollTo({ top: y, behavior: "smooth" });
         });
+      });
+
+      // ── Other section toggle ──
+      const otherToggle = document.getElementById("other-toggle");
+      const otherContent = document.getElementById("other-content");
+
+      otherToggle.addEventListener("click", () => {
+        const isOpen = otherContent.classList.toggle("open");
+        otherToggle.classList.toggle("open", isOpen);
+        otherToggle.setAttribute("aria-expanded", isOpen);
       });
 
       // ── Reveal on scroll ──
