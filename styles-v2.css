@@ -5,14 +5,14 @@
 ───────────────────────────────────────────── */
 
 :root {
-  --cream:           #faf9f6;
-  --charcoal:        #1c1c1c;
-  --rust:            #a84f3e;
-  --text-primary:    #1c1c1c;
+  --cream:           #f7f5f0;
+  --charcoal:        #2b2b2b;
+  --rust:            #3d6b4f;
+  --text-primary:    #2b2b2b;
   --text-secondary:  #4a4a4a;
   --text-tertiary:   #888;
-  --border:          #dddbd5;
-  --rule:            #e4e2dc;
+  --border:          #ddd9d0;
+  --rule:            #e2dfd6;
 
   --font-serif:  "Fraunces", Georgia, serif;
   --font-sans:   "Inter", -apple-system, sans-serif;
@@ -74,7 +74,7 @@ a {
 
 a:hover {
   text-decoration: underline;
-  text-decoration-color: rgba(168, 79, 62, 0.45);
+  text-decoration-color: rgba(61, 107, 79, 0.45);
   text-underline-offset: 0.16em;
 }
 
@@ -85,7 +85,7 @@ a:hover {
   z-index: 100;
   backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
-  background: rgba(250, 249, 246, 0.88);
+  background: rgba(247, 245, 240, 0.88);
   border-bottom: 1px solid var(--rule);
 }
 
@@ -426,7 +426,7 @@ h3 {
 
 .paper-title a:hover {
   color: var(--rust);
-  text-decoration-color: rgba(168,79,62,0.4);
+  text-decoration-color: rgba(61,107,79,0.4);
 }
 
 .paper-meta {

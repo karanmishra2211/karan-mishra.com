@@ -4,13 +4,13 @@
 ───────────────────────────────────────────── */
 
 :root {
-  --cream:          #faf9f6;
-  --charcoal:       #1c1c1c;
-  --rust:           #a84f3e;
-  --text-primary:   #1c1c1c;
+  --cream:          #f7f5f0;
+  --charcoal:       #2b2b2b;
+  --rust:           #3d6b4f;
+  --text-primary:   #2b2b2b;
   --text-secondary: #4a4a4a;
   --text-tertiary:  #888;
-  --rule:           #e4e2dc;
+  --rule:           #e2dfd6;
   --font-serif:     "Fraunces", Georgia, serif;
   --font-sans:      "Inter", -apple-system, sans-serif;
   --col:            62ch;
