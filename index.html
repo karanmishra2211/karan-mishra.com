@@ -108,6 +108,10 @@
             <li>
               <span class="paper-title">Mobile Internet and Collective Action: Evidence from India</span>
               <span class="paper-meta">Draft available upon request.</span>
+              <button class="abstract-btn" aria-expanded="false">Abstract</button>
+              <div class="abstract-content">
+                <p>How does the rapid expansion of cheap mobile internet affect collective action in developing democracies? This paper studies the 2016 launch of Jio in India, which cut mobile data prices by more than 90 percent and brought hundreds of millions of first-time users online within months. Using cross-district variation in baseline Jio coverage, the paper estimates a continuous-treatment difference-in-differences design with administrative district-year records from 2014 to 2020. Districts with greater exposure became more likely to record protests after the launch. A 10 percentage-point increase in coverage raised the probability of any protest by 1.2 percentage points, relative to a pre-period base rate of 32 percent. The results show that cheap mobile internet widened the geography of collective action in India.</p>
+              </div>
             </li>
           </ul>
         </div>
@@ -210,6 +214,16 @@
         const isOpen = menuBtn.classList.toggle("open");
         navDropdown.classList.toggle("open");
         menuBtn.setAttribute("aria-expanded", isOpen);
+      });
+
+      // ── Abstract toggle ──
+      document.querySelectorAll(".abstract-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const content = btn.nextElementSibling;
+          const isOpen = content.classList.toggle("open");
+          btn.classList.toggle("open", isOpen);
+          btn.setAttribute("aria-expanded", isOpen);
+        });
       });
 
       // ── Active nav link on scroll ──
