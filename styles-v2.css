@@ -445,49 +445,38 @@ h3 {
 }
 
 /* ── Abstract toggle ── */
-.abstract-btn {
+.abstract-toggle {
   display: inline-block;
-  margin-top: 0.45rem;
-  padding: 0.25rem 0.7rem;
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
   color: var(--text-tertiary);
-  background: none;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
 }
 
-.abstract-btn:hover {
+.abstract-toggle:hover,
+.abstract-toggle[aria-expanded="true"] {
   color: var(--rust);
-  border-color: var(--rust);
 }
 
-.abstract-btn.open {
-  color: var(--rust);
-  border-color: var(--rust);
+.abstract-panel {
+  margin-top: 0.7rem;
 }
 
-.abstract-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, margin 0.4s ease;
-  margin-top: 0;
+.abstract-panel[hidden] {
+  display: none;
 }
 
-.abstract-content.open {
-  max-height: 400px;
-  margin-top: 0.8rem;
-}
-
-.abstract-content p {
+.abstract-panel p {
   font-size: 0.88rem;
   line-height: 1.7;
   color: var(--text-secondary);
   margin: 0;
+  padding-left: 0.1rem;
+  border-left: 2px solid var(--rule);
+  padding: 0 0 0 0.8rem;
 }
 
 .paper-status {
