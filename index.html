@@ -218,7 +218,7 @@
       // ── Abstract toggle ──
       document.querySelectorAll(".abstract-toggle").forEach(toggle => {
         toggle.addEventListener("click", () => {
-          const panel = toggle.nextElementSibling;
+          const panel = toggle.closest("li").querySelector(".abstract-panel");
           const isOpen = panel.hasAttribute("hidden");
           if (isOpen) {
             panel.removeAttribute("hidden");
