@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Photographs — Karan Mishra</title>
+    <meta name="description" content="Pictures taken by Karan Mishra." />
+    <!-- Discourage search indexing — this is a hidden room -->
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:opsz,wght@14..32,350;14..32,400;14..32,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="photography.css" />
+  </head>
+  <body class="view-scroll">
+
+    <!-- ── Top bar ── -->
+    <div class="topbar">
+      <a class="back-link" href="index.html">
+        <span class="back-arrow">←</span> Karan Mishra
+      </a>
+      <div class="view-toggle" role="group" aria-label="View mode">
+        <button class="view-btn active" data-view="scroll" title="Scroll view" aria-pressed="true">scroll</button>
+        <button class="view-btn" data-view="grid" title="Grid view" aria-pressed="false">grid</button>
+      </div>
+    </div>
+
+    <main>
+      <!-- ══ Gallery ══ -->
+      <section class="series" id="gallery">
+        <div class="series-header">
+          <h2 class="series-name"></h2>
+          <!-- <span class="series-count">— add photos below</span> -->
+        </div>
+
+        <!-- Scroll view -->
+        <div class="photo-scroll" id="photo-scroll" data-series="gallery"></div>
+
+        <!-- Grid view -->
+        <div class="photo-grid" id="photo-grid" data-series="gallery"></div>
+      </section>
+
+    </main>
+
+    <!-- ── Footer ── -->
+    <footer class="photo-footer">
+      <span><a href="index.html">← back</a></span>
+      <span>Karan Mishra</span>
+    </footer>
+
+    <!-- ── Lightbox ── -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+      <button class="lightbox-close" id="lb-close" aria-label="Close">✕</button>
+      <button class="lightbox-prev" id="lb-prev" aria-label="Previous photo">←</button>
+      <div class="lightbox-img-wrap">
+        <img id="lb-img" src="" alt="" />
+      </div>
+      <button class="lightbox-next" id="lb-next" aria-label="Next photo">→</button>
+      <div class="lightbox-counter" id="lb-counter"></div>
+    </div>
+
+    <script>
+      // ── View toggle ──
+      const body      = document.body;
+      const viewBtns  = document.querySelectorAll(".view-btn");
+
+      viewBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const v = btn.dataset.view;
+          body.classList.remove("view-scroll", "view-grid");
+          body.classList.add("view-" + v);
+          viewBtns.forEach(b => {
+            b.classList.toggle("active", b === btn);
+            b.setAttribute("aria-pressed", b === btn);
+          });
+        });
+      });
+
+      // ── Photo data and rendering ──
+      const photos = [
+        { file: "paris_feb22_26.jpg", caption: "Paris, France · Feb 2026" },
+        { file: "delhi_may20.jpg", caption: "Delhi, India · May 2020" },
+        { file: "Bahamas_Jan26.jpg", caption: "Bahamas · Jan 2026" },
+        { file: "Delhi_July25.jpg", caption: "Delhi, India · July 2025" },
+        { file: "Kyoto_Nov26.jpg", caption: "Kyoto, Japan · Nov 2026" },
+        { file: "Montmarte_Dec24.JPG", caption: "Montmartre, France · Dec 2024" }
+      ];
+
+      const photoScroll = document.getElementById("photo-scroll");
+      const photoGrid = document.getElementById("photo-grid");
+
+      photoScroll.innerHTML = photos
+        .map(
+          (photo, index) => `
+              <button class="photo-scroll-item" type="button" data-index="${index}">
+                <img src="photos/${photo.file}" alt="${photo.caption}" loading="lazy" />
+                <span class="photo-scroll-caption">${photo.caption}</span>
+              </button>
+          `
+        )
+        .join("");
+
+      photoGrid.innerHTML = photos
+        .map(
+          (photo, index) => `
+            <div class="photo-item" data-series="gallery" data-index="${index}">
+              <img src="photos/${photo.file}" alt="${photo.caption}" loading="lazy" />
+            </div>
+          `
+        )
+        .join("");
+
+      // ── Lightbox ──
+      const lightbox  = document.getElementById("lightbox");
+      const lbImg     = document.getElementById("lb-img");
+      const lbClose   = document.getElementById("lb-close");
+      const lbPrev    = document.getElementById("lb-prev");
+      const lbNext    = document.getElementById("lb-next");
+      const lbCounter = document.getElementById("lb-counter");
+
+      let currentSeries = [];
+      let currentIndex  = 0;
+
+      function openLightbox(items, index) {
+        currentSeries = items;
+        currentIndex  = index;
+        showImage();
+        lightbox.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        document.body.style.overflow = "";
+        lbImg.src = "";
+      }
+
+      function showImage() {
+        const item = currentSeries[currentIndex];
+        const img  = item.querySelector("img");
+        if (!img) return;
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCounter.textContent = `${currentIndex + 1} / ${currentSeries.length}`;
+        lbPrev.style.opacity = currentIndex === 0 ? "0.2" : "1";
+        lbNext.style.opacity = currentIndex === currentSeries.length - 1 ? "0.2" : "1";
+      }
+
+      function step(dir) {
+        const next = currentIndex + dir;
+        if (next < 0 || next >= currentSeries.length) return;
+        currentIndex = next;
+        showImage();
+      }
+
+      const galleryItems = [...document.querySelectorAll(".photo-grid .photo-item")];
+
+      // Grid clicks
+      galleryItems.forEach((item, i) => {
+        item.addEventListener("click", () => openLightbox(galleryItems, i));
+      });
+
+      // Scroll clicks
+      document.querySelectorAll(".photo-scroll-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          const index = Number(item.dataset.index);
+          if (Number.isNaN(index)) return;
+          openLightbox(galleryItems, index);
+        });
+      });
+
+      lbClose.addEventListener("click", closeLightbox);
+      lbPrev.addEventListener("click",  () => step(-1));
+      lbNext.addEventListener("click",  () => step(1));
+
+      lightbox.addEventListener("click", e => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener("keydown", e => {
+        if (!lightbox.classList.contains("open")) return;
+        if (e.key === "Escape")      closeLightbox();
+        if (e.key === "ArrowLeft")   step(-1);
+        if (e.key === "ArrowRight")  step(1);
+      });
+    </script>
+  </body>
+</html>
