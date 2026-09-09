@@ -8,6 +8,7 @@
   --cream:           #ffffff;
   --charcoal:        #1a1a1a;
   --rust:            #1a73e8;
+  --pse-crimson:     #CA2E4B;
   --text-primary:    #1a1a1a;
   --text-secondary:  #4a4a4a;
   --text-tertiary:   #888;
@@ -117,7 +118,7 @@ a:hover {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--rust);
+  background: var(--pse-crimson);
   flex-shrink: 0;
 }
 
