@@ -33,11 +33,6 @@
     </div>
 
     <main>
-      <header class="page-header">
-        <h1 class="page-title">Photographs</h1>
-        <p class="page-subtitle" id="page-subtitle"></p>
-      </header>
-
       <!-- ══ Gallery ══ -->
       <section class="series" id="gallery">
         <!-- Scroll view -->
@@ -118,18 +113,6 @@
           `
         )
         .join("");
-
-      // ── Subtitle: count + year range, derived from the photos above ──
-      const years = photos
-        .map(p => { const m = p.caption.match(/\b(?:19|20)\d{2}\b/); return m ? +m[0] : null; })
-        .filter(Boolean);
-      const span = years.length
-        ? (Math.min(...years) === Math.max(...years)
-            ? `${years[0]}`
-            : `${Math.min(...years)}–${Math.max(...years)}`)
-        : "";
-      document.getElementById("page-subtitle").textContent =
-        `${photos.length} frame${photos.length === 1 ? "" : "s"}${span ? " · " + span : ""}`;
 
       // ── Lightbox ──
       const lightbox  = document.getElementById("lightbox");

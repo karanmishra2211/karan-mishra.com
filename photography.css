@@ -105,38 +105,12 @@ body {
   color: var(--text);
 }
 
-/* ── Page header ── */
-.page-header {
-  max-width: var(--col);
-  margin: 0 auto;
-  padding: 7.5rem 2rem 2.6rem;
-}
-
-.page-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 4.5vw, 3.6rem);
-  font-weight: 300;
-  letter-spacing: -0.018em;
-  line-height: 1.1;
-  color: var(--text);
-  margin: 0 0 0.55rem;
-}
-
-.page-subtitle {
-  font-size: 0.72rem;
-  color: var(--text-dim);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 500;
-  margin: 0;
-}
-
 /* ── Series ── */
 .series {
   max-width: var(--col);
   margin: 0 auto;
-  padding: 2.6rem 2rem 5rem;
-  border-top: 1px solid var(--rule);
+  /* top padding clears the fixed topbar */
+  padding: 6.5rem 2rem 5rem;
 }
 
 /* ── Scroll view — full frames, never cropped ── */
@@ -352,9 +326,7 @@ body.view-grid   .photo-grid   { display: block; } /* columns need block flow */
 @media (max-width: 800px) {
   .topbar { padding: 1.1rem 1.2rem; }
 
-  .page-header { padding: 6.5rem 1.2rem 2rem; }
-
-  .series { padding: 2rem 1.2rem 4rem; }
+  .series { padding: 5.5rem 1.2rem 4rem; }
 
   .photo-grid {
     column-count: 2;
