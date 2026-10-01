@@ -33,54 +33,38 @@
   <body>
     <div class="grain" aria-hidden="true"></div>
 
-    <header class="nav" id="top">
-      <div class="nav-inner">
-        <a class="brand" href="#top">
-          <span class="brand-dot"></span>Karan Mishra
-        </a>
-        <button class="menu-btn" id="menu-btn" aria-label="Menu" aria-expanded="false">
-          <span class="menu-line"></span>
-          <span class="menu-line"></span>
-        </button>
-      </div>
-      <nav class="nav-dropdown" id="nav-dropdown" aria-label="Main">
-        <ul class="nav-links">
-          <li><a href="#research">Research</a></li>
-          <li><a href="#data">Data</a></li>
-          <li><a href="#policy">Other Writings</a></li>
-          <li><a href="#resources">More</a></li>
-          <li><a href="https://www.dropbox.com/scl/fi/bfzofy0snelewc3uuroe6/MishraK_CV_Aug26.pdf?rlkey=1sdfpq30bt3osr5x0jn11mbis&st=gr50keup&dl=0" target="_blank" rel="noreferrer">CV</a></li>
-        </ul>
-      </nav>
-    </header>
+    <div class="layout">
+      <!-- ── Rail: identity + navigation, sticky on desktop ── -->
+      <aside class="rail" id="top">
+        <img
+          class="rail-photo"
+          src="photo.jpg"
+          alt="Karan Mishra"
+          width="800"
+          height="800"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <div class="rail-id">
+          <h1 class="rail-name">Karan Mishra</h1>
+          <p class="rail-role">Ph.D. student in Economics, Paris School of Economics</p>
+        </div>
+        <div class="rail-contact">
+          <a href="mailto:karan.mishra@psemail.eu">karan.mishra@psemail.eu</a>
+          <a href="https://www.dropbox.com/scl/fi/bfzofy0snelewc3uuroe6/MishraK_CV_Aug26.pdf?rlkey=1sdfpq30bt3osr5x0jn11mbis&st=gr50keup&dl=0" target="_blank" rel="noreferrer">CV</a>
+          <!-- <a href="https://x.com/osafarnama" target="_blank" rel="noreferrer">𝕏</a>
+          <a href="https://www.linkedin.com/in/karan-mishra-4a1285177/" target="_blank" rel="noreferrer">LinkedIn</a> -->
+        </div>
+        <nav class="rail-nav" aria-label="Main">
+          <a href="#research">Research</a>
+          <a href="#data">Data</a>
+          <a href="#policy">Other Writings</a>
+        </nav>
+      </aside>
 
-    <main>
-      <!-- ── Hero ── -->
-      <section class="hero">
-        <div class="hero-layout">
-          <div class="hero-photo-wrap">
-            <img
-              class="hero-photo"
-              src="photo.jpg"
-              alt="Karan Mishra"
-              width="800"
-              height="800"
-              fetchpriority="high"
-              decoding="async"
-            />
-            <h1 class="hero-name">Karan Mishra</h1>
-            <div class="hero-contact">
-              <!-- <a>PhD Student</a> -->
-              <a href="mailto:karan.mishra@psemail.eu">karan.mishra@psemail.eu</a>
-              <a href="https://www.dropbox.com/scl/fi/bfzofy0snelewc3uuroe6/MishraK_CV_Aug26.pdf?rlkey=1sdfpq30bt3osr5x0jn11mbis&st=gr50keup&dl=0" target="_blank" rel="noreferrer">CV</a>
-              <!-- <span class="social-links">
-                <a href="https://x.com/osafarnama" target="_blank" rel="noreferrer" aria-label="Twitter">𝕏</a>
-                <a href="https://www.linkedin.com/in/karan-mishra-4a1285177/" target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
-              </span> -->
-            </div>
-          </div>
-          <div class="hero-text">
-       <!-- <p class="subtitle">PhD Candidate, Paris School of Economics</p> -->
+      <main class="content">
+      <!-- ── Bio ── -->
+      <div class="bio">
         <p class="intro">
           I am a second-year Ph.D. student in Economics at the
           <a href="https://www.parisschoolofeconomics.eu/en/" target="_blank" rel="noreferrer">Paris School of Economics</a>
@@ -99,13 +83,11 @@
           <a href="https://www.cnrs.fr/en" target="_blank" rel="noreferrer">CNRS</a>, and the
           <a href="https://res.org.uk" target="_blank" rel="noreferrer">Royal Economic Society</a>.
         </p>
-          </div><!-- /.hero-text -->
-        </div><!-- /.hero-layout -->
-      </section>
+      </div>
 
       <!-- ── Research ── -->
       <section class="section reveal" id="research">
-        <h2>Research</h2>
+        <h2 class="sr-only">Research</h2>
 
         <div class="paper-group">
           <h3>Working Papers</h3>
@@ -165,11 +147,9 @@
 
       <!-- ── Other Writings ── -->
       <section class="section reveal" id="policy">
-        <p class="section-label"></p>
-        <h2>Other Writings</h2>
+        <h2>Other Writings · Policy</h2>
 
         <div class="paper-group">
-          <h3>Policy</h3>
           <ul class="prose-list">
             <li>
               <a href="https://atlas-offshore-world.org/download-data/" target="_blank" rel="noreferrer">
@@ -219,26 +199,11 @@
           </ul>
         </div>
       </section>
-    </main>
-
-    <footer class="footer">
-      <span>
-      <!--  <a href="mailto:karan.mishra2211@gmail.com">karan.mishra2211@gmail.com</a> -->
-      </span>
-      <span></span>
-    </footer>
+      </main>
+    </div><!-- /.layout -->
+    <!-- <a href="mailto:karan.mishra2211@gmail.com">karan.mishra2211@gmail.com</a> -->
 
     <script>
-      // ── Menu toggle ──
-      const menuBtn = document.getElementById("menu-btn");
-      const navDropdown = document.getElementById("nav-dropdown");
-
-      menuBtn.addEventListener("click", () => {
-        const isOpen = menuBtn.classList.toggle("open");
-        navDropdown.classList.toggle("open");
-        menuBtn.setAttribute("aria-expanded", isOpen);
-      });
-
       // ── Abstract toggle ──
       document.querySelectorAll(".abstract-toggle").forEach(toggle => {
         toggle.addEventListener("click", () => {
@@ -258,7 +223,7 @@
 
       // ── Active nav link on scroll ──
       const sections = document.querySelectorAll("section[id]");
-      const navLinks = document.querySelectorAll(".nav-links a[href^='#']");
+      const navLinks = document.querySelectorAll(".rail-nav a[href^='#']");
 
       const activateLink = () => {
         let current = "";
@@ -279,10 +244,7 @@
           e.preventDefault();
           const target = document.querySelector(link.getAttribute("href"));
           if (!target) return;
-          menuBtn.classList.remove("open");
-          navDropdown.classList.remove("open");
-          menuBtn.setAttribute("aria-expanded", false);
-          const y = target.getBoundingClientRect().top + window.scrollY - 88;
+          const y = target.getBoundingClientRect().top + window.scrollY - 32;
           window.scrollTo({ top: y, behavior: "smooth" });
         });
       });
