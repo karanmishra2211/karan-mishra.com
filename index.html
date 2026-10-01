@@ -59,6 +59,7 @@
           <a href="#research">Research</a>
           <a href="#data">Data</a>
           <a href="#policy">Other Writings</a>
+          <a href="#resources">More</a>
         </nav>
       </aside>
 
@@ -225,14 +226,25 @@
       const sections = document.querySelectorAll("section[id]");
       const navLinks = document.querySelectorAll(".rail-nav a[href^='#']");
 
+      // A clicked rail link stays highlighted until the reader scrolls by hand,
+      // since the last sections can't scroll high enough to win on position.
+      let pinned = null;
+      const setActive = (id) => navLinks.forEach((a) =>
+        a.classList.toggle("active", a.getAttribute("href") === `#${id}`));
+      ["wheel", "touchmove", "keydown"].forEach((ev) =>
+        window.addEventListener(ev, () => { pinned = null; }, { passive: true }));
+
       const activateLink = () => {
+        if (pinned) return setActive(pinned);
+        // The section being read is the last one whose top has passed
+        // 40% of the viewport, which still works at the bottom of the page.
         let current = "";
+        const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+        const line = window.innerHeight * (atBottom ? 0.7 : 0.4);
         sections.forEach((sec) => {
-          if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+          if (sec.getBoundingClientRect().top <= line) current = sec.id;
         });
-        navLinks.forEach((a) => {
-          a.classList.toggle("active", a.getAttribute("href") === `#${current}`);
-        });
+        setActive(current);
       };
 
       window.addEventListener("scroll", activateLink, { passive: true });
@@ -244,6 +256,10 @@
           e.preventDefault();
           const target = document.querySelector(link.getAttribute("href"));
           if (!target) return;
+          pinned = target.id;
+          setActive(pinned);
+          // "More" is folded away; unfold it when jumped to from the rail
+          if (target.id === "resources" && !otherContent.classList.contains("open")) otherToggle.click();
           const y = target.getBoundingClientRect().top + window.scrollY - 32;
           window.scrollTo({ top: y, behavior: "smooth" });
         });
