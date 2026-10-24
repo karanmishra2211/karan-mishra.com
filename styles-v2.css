@@ -74,7 +74,7 @@ a.coauthor:hover { color: var(--accent); }
 
 .site-name {
   margin: 0;
-  font-size: 3.125rem;
+  font-size: 2.25rem;
   font-weight: 400;
   letter-spacing: -0.015em;
   line-height: 1.1;
@@ -296,7 +296,7 @@ h2 {
     align-items: flex-start;
   }
 
-  .site-name { font-size: 2.4rem; }
+  .site-name { font-size: 1.875rem; }
 
   .site-nav {
     font-size: 1.0625rem;
